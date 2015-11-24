@@ -19,19 +19,20 @@ main(int argc, char ** argv){
   for (auto&& p :contour) {
     aBoard << p;
   }
-  
+
   typedef AlphaThickSegmentComputer<Z2i::Point> AlphaThickSegmentComputer2D;
-  typedef  SaturatedSegmentation<AlphaThickSegmentComputer2D> AlphaSegmentation;
-  AlphaThickSegmentComputer2D aComputer(5);
-  AlphaSegmentation segmentator(contour.begin(), contour.end(), aComputer);
-  typename AlphaSegmentation::SegmentComputerIterator it = segmentator.begin();
-  typename AlphaSegmentation::SegmentComputerIterator endSeg = segmentator.end();
-  
-  aBoard << SetMode(aComputer.className(), "BoundingBox");
-  while(it != endSeg){
-    aBoard << *it;
-    ++it;
-  }
+  // Define a SaturatedSegmentation object from the contour iterator
+
+
+
+
+
+  // From an iterator on the resulting object display all the segments:  
+
+
+
+
+
   
   aBoard.saveEPS("resultTuto4.eps");  
   return 0;

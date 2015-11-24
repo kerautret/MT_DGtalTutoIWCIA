@@ -19,24 +19,27 @@ main(int argc, char ** argv){
   for (auto&& p :contour) {
     aBoard << p;
   }
-  unsigned int index = 200;
   typedef AlphaThickSegmentComputer<Z2i::Point> AlphaThickSegmentComputer2D;
 
   AlphaThickSegmentComputer2D aComputer(5);
-  firstMaximalSegment(aComputer, contour.begin()+index, contour.begin(), contour.end());
-  AlphaThickSegmentComputer2D first (aComputer);
-  lastMaximalSegment(aComputer, contour.begin()+index, contour.begin(), contour.end());
-  AlphaThickSegmentComputer2D last (aComputer);       
-  aBoard << SetMode(first.className(), "BoundingBox");
+
+  // By using firstMaximalSegment() function, define a variable
+  // "first" which will represent the first maximal segment convering
+  // the point of index 200:
+
+
+  // Same question with the last segment: 
   
-  while(first.end() != last.end()){
-    aBoard << first;
-    nextMaximalSegment(first, contour.end());
-  }
-  aBoard << first;
-  aBoard.setPenColor(DGtal::Color::Blue);
-  aBoard.setFillColor(DGtal::Color::Blue);
-  aBoard.drawCircle(contour[index][0], contour[index][1],1); 
+
+
+
+  // By using function nextMaximalSegment() function display all the
+  // segments given between the first and the last segment:
+  
+
+
+
+ 
 
   aBoard.saveEPS("resultTuto3.eps");  
   return 0;

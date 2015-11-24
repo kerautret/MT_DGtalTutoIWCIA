@@ -26,30 +26,28 @@ main(int argc, char ** argv){
   Board2D  aBoard;
   std::vector<ScaleProfile> vectProfiles;
   unsigned int scaleMax = 5;
+  
+
   for (unsigned int i=0; i < contour.size(); i++) {
-      ScaleProfile s;
-      s.init(scaleMax);
-      vectProfiles.push_back(s);
-    }
+    // Initialise each ScaleProfile associated to each point.
+    
+    
+    // Store it in a vectProfiles
+  }
   
   std::vector<Point>::const_iterator itInit = contour.begin();
   for(unsigned int thickness = 1; thickness <= scaleMax; thickness++){
     AlphaThickSegmentComputer2D aComputer(thickness);
-    AlphaSegmentation segmentator(contour.begin(), contour.end(), aComputer);
-    typename AlphaSegmentation::SegmentComputerIterator it = segmentator.begin();
-    typename AlphaSegmentation::SegmentComputerIterator endSeg = segmentator.end();
-    for( ; it != endSeg; ++it){
-      trace.info() << ".";
-      AlphaThickSegmentComputer2D seg(*it);
-      double lengthSegment = seg.getSegmentLength();
-      std::vector<Point>::const_iterator itS = seg.begin();
-      for ( ; itS != seg.end(); ++itS) {
-        unsigned int i = std::distance(itInit, itS);
-        vectProfiles[i].addValue(thickness-1, lengthSegment/thickness);
-      }
-    }
+    //From the segment computer defined with the contour iterator, 
+    // define an SaturatedSegmentation  
+    
+    // From the previous SaturatedSegmentation iterate on all the
+    // segments.  For each segment, scan all their points and add its
+    // length in the associated ScaleProfile.
+
   }
   
+  //Display the meaningful thickness by using square of size n (noise level+1)
   unsigned int pos=0;
   for (auto&& p :contour) {
     aBoard.setFillColor(DGtal::Color(200, 200, 255));
@@ -59,6 +57,7 @@ main(int argc, char ** argv){
     aBoard.drawRectangle(p[0]-(n/2.0), p[1]+(n/2.0), n, n);
     pos++;
   }
+
   aBoard.setPenColor(DGtal::Color(50, 50, 150));
   aBoard.setLineWidth(5);
   Z2i::Point last = *(contour.begin());

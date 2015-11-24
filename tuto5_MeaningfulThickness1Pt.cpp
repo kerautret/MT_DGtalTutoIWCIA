@@ -35,48 +35,58 @@ main(int argc, char ** argv){
   typedef AlphaThickSegmentComputer<Z2i::Point> AlphaThickSegmentComputer2D;
   unsigned indexPt = 200;
 
-  // unsigned indexPt = 430;
-  ScaleProfile s;
-  s.init(5);
+  // Initialise a ScaleProfile object with size equal to 5:
+
+
+
   
   for(unsigned int thickness = 1; thickness<=5; thickness++){
-    AlphaThickSegmentComputer2D aComputer(thickness);
-    firstMaximalSegment(aComputer, contour.begin()+indexPt, contour.begin(), contour.end());
-    AlphaThickSegmentComputer2D first (aComputer);
-    lastMaximalSegment(aComputer, contour.begin()+indexPt, contour.begin(), contour.end());
-    AlphaThickSegmentComputer2D last (aComputer);       
-    aBoards[thickness-1] << SetMode(first.className(), "BoundingBox");
+    // By using the previous question of tuto3_TangentialCover compute
+    // all segments of thickness "thickness", and display if in its associated board:
     
-    while(first.end() != last.end()){
-      aBoards[thickness-1] << first;
-      ofLength << thickness << " " << first.getSegmentLength()/thickness << std::endl;
-      s.addValue(thickness - 1, first.getSegmentLength()/thickness);
-      nextMaximalSegment(first, contour.end());
-    }
-    aBoards[thickness-1] << first;
-    s.addValue(thickness - 1, first.getSegmentLength()/thickness);
-    ofLength << thickness << " " << first.getSegmentLength()/thickness << std::endl;
+    
 
-    aBoards[thickness-1].setPenColor(DGtal::Color::Blue);
-    aBoards[thickness-1].setFillColor(DGtal::Color::Blue);
-    aBoards[thickness-1].drawCircle(contour[indexPt][0], contour[indexPt][1],1);
-    std::stringstream ss; ss << "resultNoiseTuto5_" << thickness << ".eps";
-    std::stringstream ss2; ss2 << "resultNoiseTuto5_" << thickness << ".fig";
+    
 
-    aBoards[thickness-1].saveEPS(ss.str().c_str());
-    aBoards[thickness-1].saveFIG(ss2.str().c_str());
 
+
+
+
+
+
+
+
+    // in the loop which display the segments, add into the
+    // ScaleProfile object, a value in the index "thickness - 1" with
+    // value (first.getSegmentLength()/thickness) ;
+
+    
+    // Don't forget to apply the same addition for the last segment. 
+
+
+
+    // Add the display of the input point by using the drawCircle function of Board2D object.
+
+
+
+    
+    // Export each board object in eps format.
+
+
+    
   }
-  std::ofstream ofScale;
-  ofScale.open("multiscaleProfileNoiseTuto5.dat");
-  std::vector<double> x,y;
-  s.getProfile(x, y);
-  for (unsigned int i =0; i< x.size(); i++) {
-    ofScale << exp(x[i])<< " " << exp(y[i]) << std::endl;
-  }
-  ofScale.close();
-  ofLength.close();
-  trace.info() << "Noise level of index point " << indexPt << ": " << s.noiseLevel() << std::endl;
+  
+
+  // From the ScaleProfile object get save into a file the multiscale profile 
+
+
+
+
+  // Display the noise level of the considered point:
+
+
+
+
   return 0;
 }
 

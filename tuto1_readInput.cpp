@@ -13,13 +13,17 @@ int
 main(int argc, char ** argv){
   trace.info() << "First programm in DGtal" << std::endl;
   typedef Z2i::Point Point;
+  // Use the PointListReader class to get the set points contained in the file ../Samples/contourS.sdp
   std::vector<Point> contour = PointListReader<Point>::getPointsFromFile("../Samples/contourS.sdp");
-  trace.info() << "Reading input done: contour size " << contour.size() <<  std::endl;
+  
+  
   Board2D aBoard;
-  for (auto&& p :contour) {
-    aBoard << p;
-  }
-  aBoard.saveEPS("resultTuto1.eps");
+  // For all points of the contours display it using the stream operator << and the Board2D object:
+  
+
+  //  From the board object save the resulting file in eps format:
+  
+
   return 0;
 }
 
